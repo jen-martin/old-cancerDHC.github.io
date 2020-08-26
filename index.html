@@ -1,1 +1,74 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CCDH Project Tracker</title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+		/*.container {
+			height: 800px;
+			margin: 0 auto;
+			border: 2px solid blue;
+			overflow: scroll;
+		} */
+		.gantt-container {
+			height: 600px;
+			border: 2px solid #f5f5f5;
+			overflow: scroll;
+		}
+		.gantt-container .popup-wrapper .title {
+			font-weight: bold;
+			color: #dfe2e5;
+		}
+		/* style for GitHub link in the pop-up */
+		.popup-wrapper a {
+			color: #dfe2e5;
+		}
+		.admin {
+			position: relative;
+			float: right;
+		}
+		.colorcode span, div {padding: 3px; margin: 3px;}
+		/* custom class for each repo */
+		.gantt .tools .bar { fill: #666666; }
+		.cc-tools {color: #fff; background-color: #666666;}
+		.gantt .data-model-harmonization .bar { fill: #758e4f; }
+		.cc-dmh {color: #fff; background-color: #758e4f;}
+		.gantt .community-development .bar { fill: #477164; }
+		.cc-comdev {color: #fff; background-color: #477164;}
+		.gantt .Terminology .bar { fill: #60bdc6; }
+		.cc-term {color: #fff; background-color: #60bdc6;}
+		.gantt .operations .bar { fill: #0099d5; }
+		.cc-ops {color: #fff; background-color: #0099d5;}
+		
+	
+	</style>
+	<link rel="stylesheet" href="dist/frappe-gantt.css" />
+	<script src="dist/frappe-gantt.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>CCDH Project Tracker</h2>
+		<div class="colorcode">
+		<span class="cc-tools">Tools</span>
+		<span class="cc-dmh">Data Model Harmonization</span>
+		<span class="cc-term">Terminology</span>
+		<span class="cc-ops">Operations</span>
+		<span class="cc-comdev">Community Development</span>
+		</div>
+		<div class="gantt-target"></div>
+		<div class="btn-group" role="group">
+		  <button type="button" class="btn">Day</button>
+		  <button type="button" class="btn">Week</button>
+		  <button type="button" class="btn">Month</button>
+		  <button type="button" class="btn active">Year</button>
+		</div>
+		<div><button class="admin" onclick="writeGanttDataFile()">Create TSV - All GitHub Issues</button></div>
+	</div>
+
+	<script src="get-issue-data.js"></script>
+</body>
+</html>
