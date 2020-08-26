@@ -185,7 +185,7 @@ function createTasks() {
 	var repos = ["community-development", "tools", "Terminology", "data-model-harmonization", "operations"];
 	//var repos = ["test-gantt", "jen-martin.github.io"]; //test
 		
-	writeGanttDataFile();
+	//writeGanttDataFile();
 	var tasks = [];
 
 	//sent each call to each repo asynchronously and wait for them all to finish
