@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>CCDH Project Tracker</title>
+	<title>CCDH Project Task Dashboard</title>
 	<style>
 		body {
 			font-family: sans-serif;
@@ -32,15 +32,20 @@
 		}
 		.colorcode span, div {padding: 3px; margin: 3px;}
 		/* custom class for each repo */
-		.gantt .tools .bar { fill: #666666; }
+		.gantt .tools .bar { fill: #999999; }
+		.gantt .tools .bar-progress { fill: #666666; }
 		.cc-tools {color: #fff; background-color: #666666;}
-		.gantt .data-model-harmonization .bar { fill: #758e4f; }
+		.gantt .data-model-harmonization .bar { fill: #aace71;}
+		.gantt .data-model-harmonization .bar-progress { fill: #758e4f; }
 		.cc-dmh {color: #fff; background-color: #758e4f;}
-		.gantt .community-development .bar { fill: #477164; }
+		.gantt .community-development .bar { fill: #6eb29d;}
+		.gantt .community-development .bar-progress { fill: #477164; }
 		.cc-comdev {color: #fff; background-color: #477164;}
-		.gantt .Terminology .bar { fill: #60bdc6; }
+		.gantt .Terminology .bar { fill: #76e7f2;}
+		.gantt .Terminology .bar-progress { fill: #60bdc6; }
 		.cc-term {color: #fff; background-color: #60bdc6;}
-		.gantt .operations .bar { fill: #0099d5; }
+		.gantt .operations .bar { fill: #00bbff;}
+		.gantt .operations .bar-progress { fill: #0099d5; }
 		.cc-ops {color: #fff; background-color: #0099d5;}
 		
 	
@@ -51,7 +56,7 @@
 </head>
 <body>
 	<div class="container">
-		<h2>CCDH Project Tracker</h2>
+		<h2>CCDH Project Task Dashboard</h2>
 		<div class="colorcode">
 		<span class="cc-tools">Tools</span>
 		<span class="cc-dmh">Data Model Harmonization</span>
