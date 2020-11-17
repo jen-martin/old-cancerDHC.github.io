@@ -24,20 +24,29 @@
 			position: relative;
 			float: right;
 		}
-		.colorcode span, div {padding: 3px; margin: 3px;}
+		.colorcode div {padding: 3px; margin: 3px;} 
 		/* custom class for each repo */
 		.gantt .tools .bar { fill: #999999; }
 		.gantt .tools .bar-progress { fill: #666666; }
-		.cc-tools {color: #fff; background-color: #666666;}
+		.cc-tools-incomplete{background-color: #999999; margin-left: 0px; padding: 3px 0px;}
+		.cc-tools-complete {color: #fff; background-color: #666666; margin-left: 0px; padding: 3px;}
+		
 		.gantt .data-model-harmonization .bar { fill: #aace71;}
 		.gantt .data-model-harmonization .bar-progress { fill: #758e4f; }
-		.cc-dmh {color: #fff; background-color: #758e4f;}
+		.cc-dmh-incomplete {background-color: #aace71; margin-left: 0px; padding: 3px 0px;}
+		.cc-dmh-complete {color: #fff; background-color: #758e4f;  margin-left: 0px; padding: 3px;}
+
 		.gantt .community-development .bar { fill: #6eb29d;}
 		.gantt .community-development .bar-progress { fill: #477164; }
-		.cc-comdev {color: #fff; background-color: #477164;}
+		.cc-comdev-incomplete {background-color: #6eb29d; margin-left: 0px; padding: 3px 0px;}
+		.cc-comdev-complete {color: #fff; background-color: #477164;  margin-left: 0px; padding: 3px;}
+
 		.gantt .Terminology .bar { fill: #76e7f2;}
 		.gantt .Terminology .bar-progress { fill: #60bdc6; }
-		.cc-term {color: #fff; background-color: #60bdc6;}
+		.cc-term-incomplete {background-color: #76e7f2; margin-left: 0px; padding: 3px 0px;}
+		.cc-term-complete {color: #fff; background-color: #60bdc6;  margin-left: 0px; padding: 3px;}
+
 		.gantt .operations .bar { fill: #00bbff;}
 		.gantt .operations .bar-progress { fill: #0099d5; }
-		.cc-ops {color: #fff; background-color: #0099d5;}
+		.cc-ops-incomplete {background-color: #00bbff; margin-left: 0px; padding: 3px 0px;}
+		.cc-ops-complete {color: #fff; background-color: #0099d5;  margin-left: 0px; padding: 3px;}

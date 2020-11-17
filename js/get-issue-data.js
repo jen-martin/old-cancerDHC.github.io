@@ -21,48 +21,48 @@ function getGanttDate(milestone, opt) {
 			if (str.search("phase 2") >= 0) {
 				if (opt == 0) {
 					date = '2020-05-01'; // default is start of Phase 2
-					if (str.search("quarter 2") >= 0) {
+					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
 						date = '2020-05-01';
-					} else if (str.search("quarter 3") >= 0) {
+					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
 						date = '2020-08-01';
-					} else if (str.search("quarter 4") >= 0) {
+					} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
 						date = '2020-11-01';
-					} else if (str.search("quarter 1") >= 0) {
+					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
 						date = '2021-02-01';
 					}
 				} else if (opt == 1) {
 					date = '2021-04-30'; // default is end of Phase 2
-					if (str.search("quarter 2") >= 0) {
+					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
 						date = '2020-07-31';
-					} else if (str.search("quarter 3") >= 0) {
+					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
 						date = '2020-10-31';
-					} else if (str.search("quarter 4") >= 0) {
+					} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
 						date = '2021-01-31';
-					} else if (str.search("quarter 1") >= 0) {
+					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
 						date = '2021-04-30';
 					}
 				}
 			} else if (str.search("phase 3") >= 0) {
 				if (opt == 0) {
 					date = '2021-05-01'; // default is start of Phase 3
-					if (str.search("quarter 2") >= 0) {
+					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
 						date = '2021-05-01';
-					} else if (str.search("quarter 3") >= 0) {
+					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
 						date = '2021-08-01';
-					} else if (str.search("quarter 4") >= 0) {
+					} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
 						date = '2021-11-01';
-					} else if (str.search("quarter 1") >= 0) {
+					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
 						date = '2022-02-01';
 					}
 				} else if (opt == 1) {
 					date = '2022-04-30'; // default is end of Phase 3
-					if (str.search("quarter 2") >= 0) {
+					if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
 						date = '2021-07-31';
-					} else if (str.search("quarter 3") >= 0) {
+					} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
 						date = '2021-10-31';
-					} else if (str.search("quarter 4") >= 0) {
+					} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
 						date = '2022-01-31';
-					} else if (str.search("quarter 1") >= 0) {
+					} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
 						date = '2022-04-30';
 					}
 				}
@@ -70,6 +70,32 @@ function getGanttDate(milestone, opt) {
 			return date;
 		}
 	}
+}
+
+// Gets the task phase
+function getPhase(milestone, title) {
+	var phase = '';
+	if (milestone != null) {
+		if (milestone.title != null) {
+			var str = milestone.title.toLowerCase();
+			if (str.search("phase 2") >= 0) {
+				if (str.search("quarter 2") >= 0 || str.search("q2") >= 0) {
+					phase = 'Phase 2.1';
+				} else if (str.search("quarter 3") >= 0 || str.search("q3") >= 0) {
+					phase = 'Phase 2.2';
+				} else if (str.search("quarter 4") >= 0 || str.search("q4") >= 0) {
+					phase = 'Phase 2.3';
+				} else if (str.search("quarter 1") >= 0 || str.search("q1") >= 0) {
+					phase = 'Phase 2.4';
+				} else {
+					phase = 'Phase 2.0';
+				}
+			}
+		}
+	} else {
+		//infer phase from title if possible
+	}
+	return phase;
 }
 
 //Calculates the task completion percentage
@@ -159,10 +185,13 @@ function getParent(title, labels) {
 function sortTasks(alltasks) {
 	var sortedTasks = [];
 
+	//calculate completion by Phase
 	var phaseNames = ['Phase 1','Phase 2','Phase 3','Phase 4'];
 	var phaseCompleteNum = [];
 	var phaseCompleteDen = [];
 	var phaseProgress = [];
+
+	/* test -- sorting by parent
 	var firstLevel = ['2a','2b','2c'];
 	var secondLevel = ['2a1','2a2','2b1','2b2'];
 	var secondLevelProgress = [0,0,0,0];
@@ -197,6 +226,8 @@ function sortTasks(alltasks) {
 		item.progress = secondLevelProgress[j];
 		sortedTasks.push(item);
 	}
+	*/
+	
 	
 	for (let i in alltasks) {
 		item = [];
@@ -210,8 +241,11 @@ function sortTasks(alltasks) {
 		item.url = alltasks[i].url;
 		//set the color code for the progress bar
 		item.custom_class = alltasks[i].repo;
+		item.phase = alltasks[i].phase;
 		sortedTasks.push(item);
 	}
+
+	sortedTasks.sort((a, b) => (a.phase > b.phase) ? 1 : -1);
 	return sortedTasks;
 }
 
@@ -281,8 +315,10 @@ function writeGanttDataFile() {
 // to display the information.
 // TO DO: add custom formatting of bars based on repo; see
 // https://github.com/frappe/gantt/issues/175 for implementation.
+// NOTE: If a repo has more than 100 issues, will need to get multiple 
+// "pages" of data.
 function getRequest(repo, url, alltasks, resolve, reject) {
-	url = url + repo + "/issues?state=all&per_page=100";
+	url = url + repo + "/issues?state=all&per_page=100"; //gets all issues, up to 100
 	console.log("Sending request to get data: " + url);
 	  var xhttp;
 	  if (window.XMLHttpRequest) {
@@ -312,6 +348,8 @@ function getRequest(repo, url, alltasks, resolve, reject) {
 					 'repo': repo,
 					 //parent item
 					 'parent': getParent(data[i].title, data[i].labels),
+					 //project phase
+					 'phase': getPhase(data[i].milestone, data[i].title),
 				}];
 				alltasks.push(item[0]); 
 			}
